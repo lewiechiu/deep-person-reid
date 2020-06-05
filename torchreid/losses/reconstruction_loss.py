@@ -15,10 +15,11 @@ class ReconstructionLoss(nn.Module):
         margin (float, optional): margin for triplet. Default is 0.3.
     """
 
-    def __init__(self):
+    def __init__(self, use_gpu=True):
         super(ReconstructionLoss, self).__init__()
 
         self.L1_loss = nn.L1Loss()
+        self.use_gpu = use_gpu
 
     def forward(self, inputs, targets):
         """
@@ -26,5 +27,9 @@ class ReconstructionLoss(nn.Module):
             inputs (torch.Tensor): .
             targets (torch.LongTensor): 
         """
+
+        if self.use_gpu:
+            targets = targets.cuda()
+
         
         return self.L1_loss(inputs, targets)
