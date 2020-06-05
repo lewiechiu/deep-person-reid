@@ -17,6 +17,7 @@ from default_config import (
 )
 
 
+
 def build_datamanager(cfg):
     if cfg.data.type == 'image':
         return torchreid.data.ImageDataManager(**imagedata_kwargs(cfg))
@@ -36,7 +37,7 @@ def build_engine(cfg, datamanager, model, optimizer, scheduler):
                 label_smooth=cfg.loss.softmax.label_smooth
             )
 
-        else:
+        elif cfg.loss.name == 'triplet':
             engine = torchreid.engine.ImageTripletEngine(
                 datamanager,
                 model,
@@ -47,6 +48,19 @@ def build_engine(cfg, datamanager, model, optimizer, scheduler):
                 scheduler=scheduler,
                 use_gpu=cfg.use_gpu,
                 label_smooth=cfg.loss.softmax.label_smooth
+            )
+        elif cfg.loss.name == 'DCL':
+            engine = torchreid.engine.ImageSoftmaxDCLTripletEngine(
+                datamanager,
+                model,
+                optimizer=optimizer,
+                margin=cfg.loss.triplet.margin,
+                weight_t=cfg.loss.triplet.weight_t,
+                weight_x=cfg.loss.triplet.weight_x,
+                scheduler=scheduler,
+                use_gpu=cfg.use_gpu,
+                label_smooth=cfg.loss.softmax.label_smooth,
+                swap_size = (8, 4)
             )
 
     else:
