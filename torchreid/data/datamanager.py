@@ -194,6 +194,7 @@ class ImageDataManager(DataManager):
             )
             trainset.append(trainset_)
         trainset = sum(trainset)
+        # Add Destruction prep here to trainset.
 
         self._num_train_pids = trainset.num_train_pids
         self._num_train_cams = trainset.num_train_cams
@@ -212,6 +213,8 @@ class ImageDataManager(DataManager):
             pin_memory=self.use_gpu,
             drop_last=True
         )
+
+        # No need to handle test loader for DCL
 
         self.train_loader_t = None
         if load_train_targets:
