@@ -10,4 +10,6 @@ from .cuhk03 import CUHK03
 from .msmt17 import MSMT17
 from .sensereid import SenseReID
 from .market1501 import Market1501
+from .market1501DCL import Market1501DCL
+from .market1501partial import market1501partial
 from .dukemtmcreid import DukeMTMCreID
