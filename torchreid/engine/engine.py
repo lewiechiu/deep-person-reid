@@ -103,7 +103,7 @@ class Engine(object):
     def get_current_lr(self, names=None):
         names = self.get_model_names(names)
         name = names[0]
-        return self._optims[name].param_groups[0]['lr']
+        return self._optims[name].param_groups[-1]['lr']
 
     def update_lr(self, names=None):
         names = self.get_model_names(names)
@@ -449,14 +449,14 @@ class Engine(object):
         return self.model(input)
 
     def parse_data_for_train(self, data):
-        imgs = data[0]
-        pids = data[1]
+        imgs = data['img']
+        pids = data['pid']
         return imgs, pids
 
     def parse_data_for_eval(self, data):
-        imgs = data[0]
-        pids = data[1]
-        camids = data[2]
+        imgs = data['img']
+        pids = data['pid']
+        camids = data['camid']
         return imgs, pids, camids
 
     def two_stepped_transfer_learning(
