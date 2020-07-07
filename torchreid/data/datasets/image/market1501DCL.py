@@ -49,7 +49,7 @@ class Market1501DCL(ImageDataset):
             )
 
         self.train_dir = osp.join(self.data_dir, 'bounding_box_train')
-        self.query_dir = osp.join(self.data_dir, 'query')
+        self.query_dir = osp.join(self.data_dir, 'query_occlusion')
         self.gallery_dir = osp.join(self.data_dir, 'bounding_box_test')
         self.extra_gallery_dir = osp.join(self.data_dir, 'images')
         self.market1501_500k = market1501_500k

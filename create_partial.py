@@ -2,15 +2,17 @@ import cv2
 import numpy as np
 from PIL import Image
 import os
-from IPython.display import display
 
 cnt = 0
-for root, d, files in os.walk("../Market-1501-v15.09.15/market1501/Market-1501-v15.09.15/query/"):
+print("123")
+for root, d, files in os.walk("/home/louie/Market-1501-v15.09.15/market1501/Market-1501-v15.09.15/query"):
     for file in files:
+        print(file)
         if ".jpg" not in file:
             continue
         location = os.path.join(root, file)
-        save_loc = os.path.join("/".join([*root.split("/")[:-2], "query_occlusion"]) , file)
+        save_loc = os.path.join("/".join([*root.split("/")[:-1], "query_occlusion"]) , file)
+        print(save_loc)
 #         print(save_loc)
 #         print(location)
         im = Image.open(location)

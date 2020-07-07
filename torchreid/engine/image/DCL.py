@@ -158,3 +158,10 @@ class ImageSoftmaxDCLTripletEngine(Engine):
         original_law = data[7]
         swapped_law = data[8]
         return imgs, swapped_imgs , pids, original_label, swapped_label, original_law, swapped_law
+
+    def parse_data_for_eval(self, data):
+        imgs = data[0]
+        pids = data[1]
+        camids = data[2]
+        img_paths = data[3]
+        return imgs, pids, camids
