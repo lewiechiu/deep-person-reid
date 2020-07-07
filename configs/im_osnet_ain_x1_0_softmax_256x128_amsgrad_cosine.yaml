@@ -1,11 +1,11 @@
 model:
   name: 'osnet_ain_x1_0'
-  pretrained: False
+  pretrained: True
 
 data:
   type: 'image'
-  sources: ['market1501']
-  targets: ['market1501']
+  sources: ['market1501DCL']
+  targets: ['market1501DCL']
   height: 256
   width: 128
   combineall: False
@@ -16,20 +16,21 @@ loss:
   name: 'DCL'
   softmax:
     label_smooth: True
+  
 
 train:
   optim: 'amsgrad'
-  lr: 0.0015
-  max_epoch: 100
-  batch_size: 512
+  lr: 0.0025
+  max_epoch: 150
+  batch_size: 256
   fixbase_epoch: 10
   open_layers: ['classifier']
   lr_scheduler: 'cosine'
 
 test:
   batch_size: 300
-  dist_metric: 'cosine'
+  dist_metric: 'euclidean'
   normalize_feature: False
   evaluate: False
-  eval_freq: -1
+  eval_freq: 10
   rerank: False
